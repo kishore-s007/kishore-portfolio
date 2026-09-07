@@ -1,0 +1,27 @@
+﻿# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments & Secrets
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.venv/
+venv/
+ENV/
+env/
+
+# Flask / Sessions
+flask_session/
+instance/
+.webassets-cache
+
+# Editor / VS Code
+.vscode/
+
+# OS / System
+.DS_Store
+Thumbs.db

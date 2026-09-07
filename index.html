@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Data Science Portfolio</title>
+    <meta name="description" content="Portfolio of an AI & Data Science Student showcasing projects and achievements.">
+    <link rel="canonical" href="https://kishore-portfolio-gules.vercel.app/">
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="AI & Data Science Portfolio">
+    <meta property="og:description" content="Portfolio of an AI & Data Science Student showcasing projects and achievements.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kishore-portfolio-gules.vercel.app/">
+    <meta property="og:image" content="https://kishore-portfolio-gules.vercel.app/profile.jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Google Fonts: Inter for UI, Fira Code for code bits -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="profile.ico" type="image/x-icon">
+        <link rel="stylesheet" href="styles.css">
+
+    <!-- Supabase client (UMD) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+
+    <!-- Project Supabase client (loads after library) -->
+    <script src="/supabase-client.js?v=10"></script>
+</head>
+
+<body>
+    <canvas id="ai-sparkles-canvas"></canvas>
+    <div class="circuit-bg"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">&lt;Kishore's Portfolio/&gt;</a>
+            <div class="menu-icon" id="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="hero section">
+            <div class="hero-visual fade-in scroll-delay" style="position: relative;">
+                <!-- 3D background behind photo -->
+                <div id="ai-3d-container"
+                    style="position: absolute; top: -50px; left: -50px; right: -50px; bottom: -50px; z-index: 0; pointer-events: none;">
+                </div>
+
+                <!-- The Photo -->
+                <div class="profile-photo-container" style="position: relative; z-index: 5;">
+                    <img src="profile.jpeg" alt="Kishore S - Profile" class="profile-img">
+                    <div class="glow-ring"></div>
+                </div>
+            </div>
+
+            <div class="hero-content fade-in">
+                <p class="greeting">Hello World, I am</p>
+                <h1 class="glitch" data-text="KISHORE S">KISHORE S</h1>
+                <h2 class="role">AI & Data Science Innovator</h2>
+                <p class="hero-desc">Training models to see the unseen. Building intelligent systems and analyzing
+                    complex datasets to solve real-world problems.</p>
+
+                <div class="social-links">
+                    <a href="https://github.com/kishoresenthilkumar007-glitch" target="_blank" class="social-btn"><i
+                            class="fab fa-github"></i> GitHub</a>
+                    <a href="https://www.linkedin.com/in/kishore-s-147887380" target="_blank" class="social-btn"><i
+                            class="fab fa-linkedin"></i> LinkedIn</a>
+                    <div class="contact-wrapper">
+                        <button class="social-btn primary-btn contact-reveal-btn">ContactNo</button>
+                        <div class="contact-number" id="contact-popout" title="Click to copy">
+                            <i class="fas fa-copy"></i> Copy: +91 9360369359
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about section fade-in">
+            <h2 class="section-title">About_Me</h2>
+            <div class="about-grid">
+                <div class="about-text glass-card">
+                    <p>I am a passionate AI & Data Science student exploring the intersections of Machine Learning,
+                        Neural Networks, and Data Analytics.</p>
+                    <p>Currently focused on deep learning applied to computer vision and natural language processing, I
+                        love taking raw data and turning it into actionable intelligence.</p>
+                </div>
+                <div class="terminal-card glass-card">
+                    <div class="terminal-header">
+                        <span class="btn close"></span>
+                        <span class="btn min"></span>
+                        <span class="btn max"></span>
+                        <span class="title">student@ai-env: ~</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p><span class="prompt">$</span> python profile.py</p>
+                        <p class="output">{<br>
+                            &nbsp;&nbsp;"education": "BTECH Artificial Intelligence and data science"<br>
+                            &nbsp;&nbsp;"interests": ["Data Scientist", "Machine Learning", "Data Analyst", "AI"],<br>
+                            &nbsp;&nbsp;"status": "Learning and Building"<br>
+                            }</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="skills section fade-in">
+            <h2 class="section-title">Tech_Stack</h2>
+            <div class="skills-container">
+                <div class="skill-category glass-card">
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span>Python</span>
+                        <span>C</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card">
+                    <h3>Libraries / Frameworks</h3>
+                    <div class="skill-tags">
+                        <span>TensorFlow</span>
+                        <span>PyTorch</span>
+                        <span>Scikit-Learn</span>
+                        <span>Pandas</span>
+                        <span>NumPy</span>
+                        <span>OpenCV</span>
+                    </div>
+                </div>
+                <div class="skill-category glass-card">
+                    <h3>Tools</h3>
+                    <div class="skill-tags">
+                        <span>GitHub</span>
+                        <span>Jupyter</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects section fade-in">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card glass-card">
+                    <div class="project-img placeholder-img">
+                        <i class="fas fa-brain fa-3x"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Face Recognition System</h3>
+                        <p>A real-time facial recognition pipeline using OpenCV and deep learning embeddings for high
+                            accuracy matching.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>OpenCV</span>
+                            <span>Deep Learning</span>
+                        </div>
+                        <a href="#" class="view-btn">View Code <i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card glass-card">
+                    <div class="project-img placeholder-img">
+                        <i class="fas fa-graduation-cap fa-3x"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Student Performance Analysis</h3>
+                        <p>An end-to-end machine learning pipeline that analyzes historical student data to predict
+                            academic outcomes, featuring an interactive data visualization dashboard for educators.</p>
+                        <div class="project-tech">
+                            <span>Python</span>
+                            <span>XGBoost</span>
+                            <span>Streamlit</span>
+                            <span>Seaborn</span>
+                        </div>
+                        <a href="#" class="view-btn">View Code <i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="achievements section fade-in">
+            <h2 class="section-title">Achievements & Certifications</h2>
+            <div class="cert-grid">
+
+                <!-- Certificate 1 -->
+                <div class="cert-card glass-card">
+                    <div class="cert-header">
+                        <h3>AI Agent Certificate</h3>
+                        <span class="cert-date">2025</span>
+                        <button class="cert-expand-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="cert-details">
+                        <div class="cert-summary">
+                            <p><strong>What I learned:</strong> Explored the architecture, development, and deployment
+                                of autonomous AI agents. Gained hands-on experience building agents that can reason, use
+                                tools, and interact with their environments.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 2 -->
+                <div class="cert-card glass-card">
+                    <div class="cert-header">
+                        <h3>Foundations of Data Science</h3>
+                        <span class="cert-date">2025</span>
+                        <button class="cert-expand-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="cert-details">
+                        <div class="cert-summary">
+                            <p><strong>What I learned:</strong> Mastered the core principles of data wrangling,
+                                exploratory data analysis (EDA), statistical foundations, and predictive modeling
+                                necessary for extracting actionable insights from data.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Certificate 3 -->
+                <div class="cert-card glass-card">
+                    <div class="cert-header">
+                        <h3>Generative AI with AWS</h3>
+                        <span class="cert-date">2025</span>
+                        <button class="cert-expand-btn"><i class="fas fa-chevron-down"></i></button>
+                    </div>
+                    <div class="cert-details">
+                        <div class="cert-summary">
+                            <p><strong>What I learned:</strong> Deep dive into harnessing Large Language Models (LLMs)
+                                and foundation models using AWS services like Amazon Bedrock to build scalable,
+                                generative AI applications.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 KISHORE S. Built with <i class="fas fa-heart text-neon-pink"></i> and code.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="/script.js?v=10"></script>
+</body>
+
+</html>

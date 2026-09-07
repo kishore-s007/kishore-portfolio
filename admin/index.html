@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin Dashboard</title>
+    <meta name="robots" content="noindex, nofollow">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="/profile.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/styles.css?v=5"> <!-- Base styles -->
+    <link rel="stylesheet" href="/admin/admin.css?v=5"> <!-- Admin specific styles -->
+    <!-- Supabase client (UMD) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.min.js"></script>
+    <script src="/supabase-client.js"></script>
+    <script src="/admin/inline-auth.js"></script>
+</head>
+
+<body>
+    <div class="circuit-bg"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">&lt;Kishore's Portfolio / Admin&gt;</a>
+            <ul class="nav-links">
+                <li><a href="/" class="social-btn"><i class="fas fa-eye"></i> View Live Site</a></li>
+                <li><button id="save-btn" class="social-btn primary-btn"><i class="fas fa-save"></i> Save Changes</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="admin-container section">
+        <div class="hero-content" style="text-align: center; margin-bottom: 2rem; margin-top: 5rem;">
+            <p class="greeting">System Access Granted</p>
+            <h1 class="glitch" data-text="Admin Area">Admin Area</h1>
+        </div>
+
+        <!-- Notification Toast -->
+        <div id="toast" class="toast hidden">
+            <i class="fas fa-check-circle"></i> <span>Saved successfully to Supabase!</span>
+        </div>
+
+        <!-- Authentication Overlay -->
+        <div id="login-overlay" class="login-overlay">
+            <div class="glass-card login-card">
+                <h2><i class="fas fa-lock"></i> Secure Admin Access</h2>
+                <p>Please authenticate via Supabase to modify data.</p>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="auth-email" class="glass-input" placeholder="admin@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="auth-password" class="glass-input" placeholder="••••••••">
+                </div>
+                <button id="auth-btn" class="primary-btn social-btn" style="width: 100%; margin-top: 1rem;"><i class="fas fa-sign-in-alt"></i> Authenticate</button>
+                <p id="auth-error" style="color: #ff5555; margin-top: 1rem; font-size: 0.9rem; display: none;"></p>
+            </div>
+        </div>
+
+        <div id="admin-editor-grid" style="display: none;">
+            
+            <!-- TAB BUTTONS -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-target="tab-hero">Hero & Bio</button>
+                <button class="tab-btn" data-target="tab-about">About Me</button>
+                <button class="tab-btn" data-target="tab-skills">Skills & Tech</button>
+                <button class="tab-btn" data-target="tab-projects">Projects</button>
+                <button class="tab-btn" data-target="tab-achievements">Achievements</button>
+            </div>
+
+            <!-- HERO TAB -->
+            <div class="editor-section glass-card tab-content active" id="tab-hero">
+                <h2><i class="fas fa-user-astronaut"></i> Hero & Contact Details</h2>
+                <div class="form-group">
+                    <label>Display Name</label>
+                    <input type="text" id="hero-name" class="glass-input" placeholder="KISHORE S">
+                </div>
+                <div class="form-group">
+                    <label>Role / Headline</label>
+                    <input type="text" id="hero-role" class="glass-input" placeholder="AI & Data Science Innovator">
+                </div>
+                <div class="form-group">
+                    <label>Short Bio / Description</label>
+                    <textarea rows="3" id="hero-desc" class="glass-input" placeholder="Training models to see the unseen..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>GitHub Profile URL</label>
+                    <input type="text" id="hero-github" class="glass-input" placeholder="https://github.com/...">
+                </div>
+                <div class="form-group">
+                    <label>LinkedIn Profile URL</label>
+                    <input type="text" id="hero-linkedin" class="glass-input" placeholder="https://linkedin.com/in/...">
+                </div>
+                <div class="form-group">
+                    <label>Contact Number</label>
+                    <input type="text" id="hero-contact" class="glass-input" placeholder="+91 9360369359">
+                </div>
+            </div>
+
+            <!-- ABOUT TAB -->
+            <div class="editor-section glass-card tab-content" id="tab-about">
+                <h2><i class="fas fa-info-circle"></i> About Me Details</h2>
+                <div class="form-group">
+                    <label>Paragraph 1</label>
+                    <textarea rows="3" id="about-p1" class="glass-input" placeholder="I am a passionate AI & Data Science student..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Paragraph 2</label>
+                    <textarea rows="3" id="about-p2" class="glass-input" placeholder="Currently focused on deep learning..."></textarea>
+                </div>
+            </div>
+
+            <!-- SKILLS -->
+            <div class="editor-section glass-card tab-content" id="tab-skills">
+                <h2><i class="fas fa-cogs"></i> Skills & Technologies</h2>
+                <div class="form-group">
+                    <label>Programming Languages (comma separated)</label>
+                    <input type="text" id="skills-languages" class="glass-input" placeholder="e.g. Python, C++, JavaScript">
+                </div>
+                <div class="form-group">
+                    <label>Libraries & Frameworks (comma separated)</label>
+                    <input type="text" id="skills-libraries" class="glass-input" placeholder="e.g. TensorFlow, React, Flask">
+                </div>
+                <div class="form-group">
+                    <label>Developer Tools (comma separated)</label>
+                    <input type="text" id="skills-tools" class="glass-input" placeholder="e.g. Git, Docker, AWS">
+                </div>
+            </div>
+
+            <!-- PROJECTS -->
+            <div class="editor-section glass-card tab-content" id="tab-projects">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="margin-bottom: 0;"><i class="fas fa-project-diagram"></i> Projects Portfolio</h2>
+                    <button id="add-proj-btn" class="social-btn primary-btn" style="padding: 8px 15px; font-size: 0.9rem;"><i class="fas fa-plus"></i> Add Project</button>
+                </div>
+                <div id="projects-container" class="dynamic-list">
+                    <!-- Projects injected securely here -->
+                </div>
+            </div>
+
+            <!-- ACHIEVEMENTS -->
+            <div class="editor-section glass-card tab-content" id="tab-achievements">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2 style="margin-bottom: 0;"><i class="fas fa-trophy"></i> Achievements & Certifications</h2>
+                    <button id="add-achv-btn" class="social-btn primary-btn" style="padding: 8px 15px; font-size: 0.9rem;"><i class="fas fa-plus"></i> Add Cert</button>
+                </div>
+                <div id="achievements-container" class="dynamic-list">
+                    <!-- Achievements injected securely here -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="/admin/admin.js?v=7"></script>
+    <!-- Custom Confirm Modal for delete actions -->
+    <div id="confirm-modal" class="confirm-modal hidden">
+        <div class="confirm-backdrop"></div>
+        <div class="confirm-dialog glass-card">
+            <p id="confirm-message" style="margin-bottom:1rem; font-size:1.05rem;">Are you sure?</p>
+            <div class="confirm-actions">
+                <button id="confirm-cancel" class="social-btn">Cancel</button>
+                <button id="confirm-ok" class="social-btn primary-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
